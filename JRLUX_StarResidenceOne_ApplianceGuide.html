@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JRLUX Homestays — Appliance Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8D5A3; --gold-pale: #FBF6EC;
+    --dark: #1A1A1A; --mid: #6B6B6B; --light: #F5F2ED; --white: #FFFFFF; --border: #E2D9C8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family:'Jost','Noto Sans SC',sans-serif; background:var(--light); color:var(--dark); }
+  .cn { font-family:'Noto Sans SC',sans-serif; color: var(--mid); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(26,26,26,0.96); backdrop-filter:blur(8px); padding:0 2rem; height:56px; display:flex; align-items:center; justify-content:space-between; }
+  .nav-links { display:flex; gap:1.2rem; list-style:none; }
+  .nav-links a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:500; }
+  .nav-links a:hover { color:var(--gold); }
+
+  .cover { min-height:60vh; background:var(--dark); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:7rem 2rem 3rem; text-align:center; }
+  .cover-pattern { position:absolute; inset:0; opacity:0.04; background-image:repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size:20px 20px; }
+  .cover-eyebrow { font-size:0.66rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); font-weight:500; margin:1.5rem 0 0.5rem; }
+  .cover-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3rem); font-weight:300; color:var(--white); }
+  .cover-title em { color:var(--gold); font-style:italic; }
+  .cover-title-cn { font-family:'Noto Sans SC',sans-serif; font-size:1rem; color:rgba(255,255,255,0.5); margin-top:0.5rem; }
+  .cover-subtitle { font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-top:1.25rem; }
+  .cover-divider { width:60px; height:1px; background:var(--gold); margin:1.5rem auto; opacity:0.6; }
+  .cover-count { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--gold); }
+  .cover-count-lbl { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+
+  section { padding:3.5rem 2rem; max-width:820px; margin:0 auto; }
+  .section-eyebrow { font-size:0.63rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:0.75rem; display:flex; align-items:center; gap:12px; }
+  .section-eyebrow::after { content:''; flex:1; height:1px; background:var(--border); }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,3.4vw,2.2rem); font-weight:300; margin-bottom:0.5rem; }
+  .section-title em { color:var(--gold); font-style:italic; }
+  .section-title-cn { font-size:0.85rem; color:var(--mid); margin-bottom:1.25rem; }
+
+  .index-grid { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1.5rem; }
+  .index-chip { display:flex; align-items:center; gap:6px; background:var(--white); border:1px solid var(--border); border-radius:100px; padding:8px 14px; font-size:0.78rem; color:var(--dark); text-decoration:none; }
+  .index-chip:hover { border-color:var(--gold); color:var(--gold); }
+  .index-chip .cn { font-size:0.72rem; }
+
+  .appliance { background:var(--white); border-top:3px solid var(--gold); border-radius:2px; padding:2.25rem 2rem; margin-top:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,0.03); }
+  .app-head { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; }
+  .app-icon { font-size:1.8rem; }
+  .app-num { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+  .app-name { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--dark); }
+  .app-name-cn { font-size:0.85rem; color:var(--mid); margin-top:2px; }
+  .app-model { font-size:0.72rem; color:var(--mid); margin-top:4px; letter-spacing:0.02em; }
+
+  .step-block { margin-top:1.25rem; }
+  .step-block-title { font-size:0.78rem; font-weight:500; color:var(--dark); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.75rem; }
+  .step-block-title .cn { font-weight:400; text-transform:none; letter-spacing:0; margin-left:6px; }
+  .step-item { display:flex; gap:0.75rem; align-items:flex-start; padding:0.55rem 0; border-bottom:1px solid var(--border); }
+  .step-item:last-child { border-bottom:none; }
+  .step-num { min-width:22px; height:22px; border-radius:50%; background:var(--gold-pale); border:1px solid var(--gold-light); display:flex; align-items:center; justify-content:center; font-size:0.62rem; color:var(--gold); font-weight:600; flex-shrink:0; margin-top:1px; }
+  .step-text { font-size:0.85rem; color:var(--dark); line-height:1.6; }
+  .step-text strong { font-weight:600; }
+  .step-text .cn { display:block; font-size:0.78rem; margin-top:2px; }
+
+  .warn-box, .tip-box { margin-top:1.25rem; padding:0.9rem 1.1rem; border-radius:2px; font-size:0.8rem; line-height:1.6; }
+  .warn-box { background:#FDF3EC; border:1px solid #EAC9A8; color:#7A5230; }
+  .tip-box { background:var(--gold-pale); border:1px solid var(--gold-light); color:var(--mid); }
+  .warn-box strong, .tip-box strong { color:var(--dark); }
+  .warn-box .cn, .tip-box .cn { display:block; margin-top:3px; font-size:0.75rem; }
+
+  footer { background:var(--dark); padding:2.5rem 2rem; text-align:center; border-top:1px solid rgba(255,255,255,0.06); }
+  .footer-sub { font-size:0.68rem; color:rgba(255,255,255,0.3); letter-spacing:0.1em; text-transform:uppercase; margin-top:0.75rem; }
+  .footer-line { width:40px; height:1px; background:var(--gold); margin:1.1rem auto; opacity:0.4; }
+  .footer-note { font-size:0.73rem; color:rgba(255,255,255,0.3); max-width:420px; margin:0 auto; line-height:1.7; }
+  .footer-note .cn { display:block; margin-top:4px; }
+
+  @media (max-width:600px) { .nav-links { display:none; } section { padding:2.5rem 1.25rem; } .appliance { padding:1.5rem 1.25rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <svg width="90" height="25" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+    <circle cx="40" cy="40" r="34" fill="none" stroke="#C9A84C" stroke-width="2"/>
+    <circle cx="40" cy="40" r="27" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+    <text x="40" y="48" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#C9A84C" text-anchor="middle" letter-spacing="1.5">JR</text>
+    <line x1="84" y1="16" x2="84" y2="64" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+    <text x="98" y="44" font-family="Georgia,serif" font-size="30" font-weight="400" fill="#FFFFFF" letter-spacing="7">LUX</text>
+    <text x="99" y="60" font-family="Georgia,serif" font-size="8" fill="#C9A84C" letter-spacing="3.5">HOMESTAYS</text>
+  </svg>
+  <ul class="nav-links">
+    <li><a href="#index">Index · 目录</a></li>
+    <li><a href="#a1">Washer 洗衣机</a></li>
+    <li><a href="#a5">TV 电视</a></li>
+    <li><a href="#a6">Microwave 微波炉</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-pattern"></div>
+  <div class="cover-eyebrow">JRLUX Homestays</div>
+  <h1 class="cover-title">Appliance <em>Guide</em></h1>
+  <p class="cover-title-cn">电器使用手册</p>
+  <p class="cover-subtitle">Star Residence One &nbsp;·&nbsp; Kuala Lumpur, Malaysia</p>
+  <div class="cover-divider"></div>
+  <div class="cover-count">14</div>
+  <div class="cover-count-lbl">Appliances &nbsp;·&nbsp; 电器</div>
+</div>
+
+<!-- INDEX -->
+<div id="index">
+<section>
+  <div class="section-eyebrow">Quick Index</div>
+  <h2 class="section-title">All <em>Appliances</em></h2>
+  <p class="section-title-cn">所有电器 · 点击直接跳转操作说明</p>
+  <div class="index-grid">
+    <a class="index-chip" href="#a1">🧺 01 Washer-Dryer <span class="cn">洗烘一体机</span></a>
+    <a class="index-chip" href="#a2">🔥 02 Built-In Oven <span class="cn">嵌入式烤箱</span></a>
+    <a class="index-chip" href="#a3">🍳 03 Hob &amp; Extractor <span class="cn">灶台与抽油烟机</span></a>
+    <a class="index-chip" href="#a4">❄️ 04 Air Conditioner <span class="cn">空调</span></a>
+    <a class="index-chip" href="#a5">📺 05 Smart TV <span class="cn">智能电视</span></a>
+    <a class="index-chip" href="#a6">📡 06 Microwave <span class="cn">微波炉</span></a>
+    <a class="index-chip" href="#a7">🍚 07 Rice Cooker <span class="cn">电饭锅</span></a>
+    <a class="index-chip" href="#a8">🍞 08 Toaster <span class="cn">烤面包机</span></a>
+    <a class="index-chip" href="#a9">🥤 09 Blender <span class="cn">搅拌机</span></a>
+    <a class="index-chip" href="#a10">🧹 10 Vacuum Cleaner <span class="cn">吸尘器</span></a>
+    <a class="index-chip" href="#a11">☕ 11 Coffee Maker <span class="cn">咖啡机</span></a>
+    <a class="index-chip" href="#a12">🫖 12 Electric Kettle <span class="cn">电热水壶</span></a>
+    <a class="index-chip" href="#a13">💨 13 Hair Dryer <span class="cn">吹风机</span></a>
+    <a class="index-chip" href="#a14">👔 14 Steam Iron <span class="cn">蒸汽熨斗</span></a>
+  </div>
+</section>
+</div>
+
+<!-- 01 WASHER-DRYER -->
+<div id="a1"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🧺</div>
+    <div>
+      <div class="app-num">01 · Laundry</div>
+      <div class="app-name">Samsung Eco-Bubble Washer-Dryer</div>
+      <div class="app-name-cn">三星洗烘一体机</div>
+      <div class="app-model">Model: EWD8060B · 8.0kg Wash / 6.0kg Dry</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Washing <span class="cn">洗涤</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Press the <strong>Power</strong> button to switch on.<span class="cn">按<strong>电源键</strong>开机。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Load laundry — max wash 8.0kg, max dry 6.0kg. Close the door firmly.<span class="cn">放入衣物——最大洗涤8.0公斤，最大烘干6.0公斤。关紧机门。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Pull out the detergent drawer (top left) and add detergent; add fabric softener if desired. Do not exceed the MAX line.<span class="cn">拉出洗涤剂盒（左上方），加入洗衣液；如需要可加入柔顺剂。请勿超过MAX刻度线。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">Turn the program dial: <strong>Cotton</strong> (everyday items), <strong>Synthetics</strong> (lightweight garments), <strong>15' Quick Wash</strong>, or <strong>Rinse + Spin</strong>.<span class="cn">旋转程序旋钮：<strong>棉质</strong>（日常衣物）、<strong>化纤</strong>（轻薄衣物）、<strong>15分钟快洗</strong>或<strong>漂洗+脱水</strong>。</span></div></div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Drying (Optional) <span class="cn">烘干（可选）</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">After washing, turn the dial to <strong>Cotton Dry</strong> or <strong>Synthetics Dry</strong>, then press <strong>Start/Pause</strong>.<span class="cn">洗涤后，将旋钮转至<strong>棉质烘干</strong>或<strong>化纤烘干</strong>，然后按<strong>启动/暂停</strong>。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">The machine beeps when finished — open the door and remove laundry.<span class="cn">完成后机器会发出提示音——打开机门取出衣物。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ <strong>Always empty pockets before washing.</strong> Clothes may be hot right after drying. If you hear unusual noise or smell burning, stop and contact your host.<span class="cn">洗涤前请务必清空口袋。烘干后衣物可能较烫。若听到异响或闻到烧焦味，请停止使用并联系房东。</span></div>
+</div></section></div>
+
+<!-- 02 OVEN -->
+<div id="a2"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🔥</div>
+    <div>
+      <div class="app-num">02 · Kitchen</div>
+      <div class="app-name">Bosch Built-In Oven</div>
+      <div class="app-name-cn">博世嵌入式烤箱</div>
+      <div class="app-model">Model: HBA534BS0A / Type: HR5B20F0</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Turn the <strong>left dial</strong> to choose a cooking mode: <strong>3D Hot Air</strong>, <strong>Top &amp; Bottom Heat</strong>, <strong>Grill</strong>, or <strong>Pizza Mode</strong>.<span class="cn">转动<strong>左侧旋钮</strong>选择烹饪模式：<strong>3D热风</strong>、<strong>上下加热</strong>、<strong>烧烤</strong>或<strong>披萨模式</strong>。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Turn the <strong>right dial</strong> to set temperature — 160–200°C for baking/roasting, 200–250°C for pizza/grilling.<span class="cn">转动<strong>右侧旋钮</strong>设定温度——烘烤/烤肉160–200°C，披萨/烧烤200–250°C。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Press <strong>Timer</strong>, use + / − to set cooking time, then press <strong>Start/Stop</strong> to confirm.<span class="cn">按<strong>定时键</strong>，用+/−设定烹饪时间，按<strong>启动/停止</strong>确认。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">When done, turn the left dial back to <strong>Off (●)</strong> and remove food using oven mitts.<span class="cn">完成后将左侧旋钮转回<strong>关闭（●）</strong>位置，使用隔热手套取出食物。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ <strong>Always use oven mitts.</strong> Do not place plastic containers inside. If you smell burning, turn off the oven and inform your host.<span class="cn">务必使用隔热手套。请勿将塑料容器放入烤箱内。若闻到烧焦味，请关闭烤箱并告知房东。</span></div>
+</div></section></div>
+
+<!-- 03 HOB & EXTRACTOR -->
+<div id="a3"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🍳</div>
+    <div>
+      <div class="app-num">03 · Kitchen</div>
+      <div class="app-name">Bosch Hob &amp; Extractor Hood</div>
+      <div class="app-name-cn">博世灶台与抽油烟机</div>
+      <div class="app-model">Model: PKK651FP1E</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Hob <span class="cn">灶台</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Touch <strong>⏻ (Main Switch)</strong> to power on — all displays light up.<span class="cn">触摸<strong>⏻（总开关）</strong>开机——所有显示灯亮起。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Touch the <strong>◎ symbol</strong> for your chosen burner, then tap a number <strong>1 (low) to 9 (high)</strong> to set heat.<span class="cn">触摸对应炉头的<strong>◎符号</strong>，然后点选<strong>1（弱）至9（强）</strong>设定火力。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Tap <strong>P</strong> for PowerBoost to bring water to a boil extra fast.<span class="cn">点击<strong>P</strong>启动加速沸腾功能，可更快烧开水。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">To stop a zone, select it and tap <strong>0</strong>. To switch off the whole hob, touch <strong>⏻</strong>. Wait for the "H" symbol to disappear before cleaning.<span class="cn">关闭单个炉头：选中后点击<strong>0</strong>。关闭整个灶台：触摸<strong>⏻</strong>。清洁前请等待"H"符号消失。</span></div></div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Extractor Hood <span class="cn">抽油烟机</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Press <strong>Power</strong> to start the fan. Choose <strong>Speed 1 (low)</strong>, <strong>2 (medium)</strong>, or <strong>3 (high)</strong>.<span class="cn">按<strong>电源键</strong>启动风扇。选择<strong>1档（弱）</strong>、<strong>2档（中）</strong>或<strong>3档（强）</strong>。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Press <strong>Light</strong> to turn the hood light on or off.<span class="cn">按<strong>照明键</strong>开关抽油烟机灯光。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ <strong>Never leave cooking unattended.</strong> Use flat-bottom cookware only. If the glass is cracked or you smell gas, switch off the main fuse and contact your host immediately.<span class="cn">烹饪时切勿离开。请仅使用平底炊具。若玻璃面板破裂或闻到煤气味，请立即关闭总保险丝并联系房东。</span></div>
+</div></section></div>
+
+<!-- 04 AIR CONDITIONER -->
+<div id="a4"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">❄️</div>
+    <div>
+      <div class="app-num">04 · Comfort</div>
+      <div class="app-name">Samsung Air Conditioner</div>
+      <div class="app-name-cn">三星空调</div>
+      <div class="app-model">Digital Inverter Split Unit (1.5HP / 2.5HP)</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Operation <span class="cn">操作方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Point the remote at the indoor unit and press <strong>Power</strong>.<span class="cn">将遥控器对准室内机，按<strong>电源键</strong>。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Press <strong>Mode</strong> to choose: <strong>Cool</strong> / Dry / Fan / Auto. Recommended: Cool for daily use.<span class="cn">按<strong>模式键</strong>选择：<strong>制冷</strong>/除湿/送风/自动。日常建议使用制冷模式。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Press <strong>Temp + / −</strong> to set temperature. Recommended range: 24–26°C.<span class="cn">按<strong>温度+/−</strong>设定温度。建议范围：24–26°C。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">Press <strong>Fan &lt;/&gt;</strong> for fan speed, or <strong>Blade Direction</strong> for airflow/swing.<span class="cn">按<strong>风速键</strong>调整风速，或按<strong>导风板键</strong>调整出风方向/摇摆。</span></div></div>
+    <div class="step-item"><div class="step-num">5</div><div class="step-text">Optional: <strong>Turbo</strong> (fast cooling), <strong>Quiet</strong> (low noise), <strong>Good Sleep</strong> (night comfort), <strong>Auto Clean</strong> (dries interior to prevent odor).<span class="cn">可选功能：<strong>速冷</strong>、<strong>静音</strong>、<strong>安睡模式</strong>、<strong>自动清洁</strong>（烘干内部防止异味）。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Don't block the air vents or touch the remote with wet hands. After a power cut, wait 2–3 minutes before restarting.<span class="cn">请勿阻挡出风口，也请勿用湿手操作遥控器。停电后请等待2–3分钟再重新开机。</span></div>
+</div></section></div>
+
+<!-- 05 SMART TV -->
+<div id="a5"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">📺</div>
+    <div>
+      <div class="app-num">05 · Entertainment</div>
+      <div class="app-name">LG Smart TV</div>
+      <div class="app-name-cn">LG 智能电视</div>
+      <div class="app-model">WiFi &amp; Netflix Pre-Configured</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Using the Remote <span class="cn">使用遥控器</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Press <strong>Power</strong> on the remote or the TV to turn on/off.<span class="cn">按遥控器或电视上的<strong>电源键</strong>开关机。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Press <strong>Home</strong> to open the main menu and access apps.<span class="cn">按<strong>Home键</strong>打开主菜单，进入应用程序。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Use <strong>Volume + / −</strong> for sound, and arrow keys + <strong>OK</strong> to navigate and select.<span class="cn">用<strong>音量+/−</strong>调节声音，用方向键+<strong>OK键</strong>导航和确认。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ <strong>Please do not log out of Netflix or disconnect the WiFi</strong> — the network is preset, and re-registering it is inconvenient for your host. Netflix is ready to enjoy during your stay.<span class="cn">请<strong>勿退出Netflix账户或断开WiFi连接</strong>——网络已预先设置，重新注册会给房东带来不便。入住期间可尽情观看Netflix。</span></div>
+</div></section></div>
+
+<!-- 06 MICROWAVE -->
+<div id="a6"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">📡</div>
+    <div>
+      <div class="app-num">06 · Kitchen</div>
+      <div class="app-name">Electrolux Microwave</div>
+      <div class="app-name-cn">伊莱克斯微波炉</div>
+      <div class="app-model">Model: EMG23K22B</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Place food in a microwave-safe container in the centre of the turntable. Avoid metal or foil.<span class="cn">将食物放入微波炉专用容器，置于转盘中央。请勿使用金属或铝箔。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Turn the <strong>top knob</strong> to set power: <strong>Quick Cook</strong> (100%/800W), <strong>Reheat</strong> (~80%), <strong>Simmer</strong> (~50–60%), <strong>Defrost</strong> (~30%), or <strong>Melt</strong> (~15%).<span class="cn">转动<strong>顶部旋钮</strong>设定功率：<strong>快速加热</strong>（100%/800W）、<strong>复热</strong>（约80%）、<strong>慢炖</strong>（约50–60%）、<strong>解冻</strong>（约30%）或<strong>融化</strong>（约15%）。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Turn the <strong>bottom knob</strong> to set time (1–35 min) — it starts automatically.<span class="cn">转动<strong>底部旋钮</strong>设定时间（1–35分钟）——设定后自动开始。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">The microwave dings when finished. Use a cloth or oven mitt to remove hot containers.<span class="cn">完成后微波炉会发出提示音。请用布或隔热手套取出热容器。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Never run the microwave when empty, and never place metal inside. If you see smoke or sparks, unplug immediately.<span class="cn">请勿空转微波炉，切勿放入金属物品。若发现冒烟或火花，请立即拔掉插头。</span></div>
+</div></section></div>
+
+<!-- 07 RICE COOKER -->
+<div id="a7"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🍚</div>
+    <div>
+      <div class="app-num">07 · Kitchen</div>
+      <div class="app-name">Philips Rice Cooker</div>
+      <div class="app-name-cn">飞利浦电饭锅</div>
+      <div class="app-model">Model: E7RC1650K</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Cooking Rice <span class="cn">煮饭方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Wash rice and add to the inner pot with water to the correct level line. Wipe the pot's exterior dry, then place it in the cooker.<span class="cn">淘洗大米，放入内锅并按刻度线加水。擦干内锅外部，放入电饭锅中。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Close the lid and plug in. Press <strong>M</strong> to choose a program: Fast Cook / White Rice / Congee / Soup / Cake / Brown Rice / Steam / Keep Warm.<span class="cn">盖好锅盖并插上电源。按<strong>M键</strong>选择程序：快煮/白米饭/粥/汤/蛋糕/糙米/蒸煮/保温。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Use <strong>L</strong> to adjust time where applicable, then press <strong>O</strong> to start.<span class="cn">如适用，用<strong>L键</strong>调整时间，然后按<strong>O键</strong>开始。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">The cooker beeps six times when done and switches to <strong>Keep Warm</strong> automatically.<span class="cn">完成后电饭锅会发出六声提示音，并自动切换至<strong>保温</strong>模式。</span></div></div>
+  </div>
+  <div class="tip-box">💡 Use only the rice paddle provided — no metal utensils.<span class="cn">请仅使用随附的饭勺，勿使用金属器具。</span></div>
+</div></section></div>
+
+<!-- 08 TOASTER -->
+<div id="a8"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🍞</div>
+    <div>
+      <div class="app-num">08 · Kitchen</div>
+      <div class="app-name">Philips Toaster</div>
+      <div class="app-name-cn">飞利浦烤面包机</div>
+      <div class="app-model">Model: HD-2581</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Select browning level (1–8) using the dial.<span class="cn">用旋钮选择烘烤度（1–8档）。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Insert bread and press the lever down to start.<span class="cn">放入面包，按下控制杆开始烘烤。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">For reheat, defrost, or bun warming, turn the dial to the corresponding setting.<span class="cn">如需重新加热、解冻或加热面包，将旋钮转至相应档位。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">Turn to <strong>Off</strong> at any time to cancel.<span class="cn">随时将旋钮转至<strong>关闭</strong>即可取消。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Never use metal objects to remove toast from the slots.<span class="cn">切勿使用金属器具从卡槽中取出面包。</span></div>
+</div></section></div>
+
+<!-- 09 BLENDER -->
+<div id="a9"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🥤</div>
+    <div>
+      <div class="app-num">09 · Kitchen</div>
+      <div class="app-name">Philips Blender — Twin Jug</div>
+      <div class="app-name-cn">飞利浦双杯搅拌机</div>
+      <div class="app-model">Model: HR-2041/50</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Lock the appropriate jug securely onto the base.<span class="cn">将合适的搅拌杯牢固地安装到底座上。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Add ingredients and select speed using the control dial.<span class="cn">放入食材，用控制旋钮选择转速。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Use the <strong>Pulse</strong> function for short bursts to fine-tune texture.<span class="cn">使用<strong>点动功能</strong>短时间运转以调整质地。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">Detach the jug, wash with warm soapy water, and dry before storing.<span class="cn">取下搅拌杯，用温热肥皂水清洗，晾干后收纳。</span></div></div>
+  </div>
+  <div class="tip-box">💡 Always unplug the appliance before cleaning.<span class="cn">清洁前请务必拔掉插头。</span></div>
+</div></section></div>
+
+<!-- 10 VACUUM -->
+<div id="a10"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🧹</div>
+    <div>
+      <div class="app-num">10 · Housekeeping</div>
+      <div class="app-name">Philips Bagless Vacuum Cleaner</div>
+      <div class="app-name-cn">飞利浦无袋式吸尘器</div>
+      <div class="app-model">Model: FC9352</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Press the power button to turn on or off.<span class="cn">按电源键开机或关机。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Adjust suction using the control dial for different floor types.<span class="cn">用控制旋钮根据不同地面类型调整吸力。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Attach the right tool — crevice nozzle or upholstery brush — for the area you're cleaning.<span class="cn">根据清洁区域安装相应吸头——缝隙吸嘴或软垫刷。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">Press the release button to remove and empty the dust bin. Let it dry fully before reinstalling.<span class="cn">按释放键取出并倒空集尘盒。待其完全干燥后再装回。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Do not use to pick up water or oversized debris.<span class="cn">请勿吸取水分或大块杂物。</span></div>
+</div></section></div>
+
+<!-- 11 COFFEE MAKER -->
+<div id="a11"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">☕</div>
+    <div>
+      <div class="app-num">11 · Kitchen</div>
+      <div class="app-name">Electrolux Coffee Maker</div>
+      <div class="app-name-cn">伊莱克斯咖啡机</div>
+      <div class="app-model">Model: E5CM1-80ST</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">Brewing Coffee <span class="cn">冲泡咖啡</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Open the water reservoir lid and fill with fresh water.<span class="cn">打开水箱盖，注入新鲜清水。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Place a coffee filter in the basket and add ground coffee.<span class="cn">在滤篮中放入咖啡滤纸，加入研磨咖啡粉。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Close the lid and press <strong>Start</strong>. Press <strong>Aroma</strong> for a stronger brew.<span class="cn">盖上盖子，按<strong>启动键</strong>。按<strong>香醇键</strong>可冲泡更浓郁的咖啡。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">The machine keeps warm after brewing and auto-switches off after 40 minutes.<span class="cn">冲泡完成后自动保温，40分钟后自动关机。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Do not remove the jug for more than 30 seconds during brewing.<span class="cn">冲泡过程中请勿将咖啡壶取出超过30秒。</span></div>
+</div></section></div>
+
+<!-- 12 KETTLE -->
+<div id="a12"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">🫖</div>
+    <div>
+      <div class="app-num">12 · Kitchen</div>
+      <div class="app-name">Philips Electric Kettle</div>
+      <div class="app-name-cn">飞利浦电热水壶</div>
+      <div class="app-model">Model: HD9303</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Fill with water between the MIN and MAX marks, via the spout or by opening the lid.<span class="cn">通过壶嘴或打开壶盖，加水至MIN与MAX刻度之间。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Place the kettle on its base, seated correctly.<span class="cn">将水壶正确放置在底座上。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Press the power switch down to start boiling.<span class="cn">按下电源开关开始烧水。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">The kettle switches off automatically once water reaches the boil. Lift from the base to pour.<span class="cn">水烧开后自动关闭。从底座取下即可倒水。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Do not fill above the MAX mark, and never switch on without water inside.<span class="cn">请勿加水超过MAX刻度，切勿在无水状态下开机。</span></div>
+</div></section></div>
+
+<!-- 13 HAIR DRYER -->
+<div id="a13"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">💨</div>
+    <div>
+      <div class="app-num">13 · Bathroom</div>
+      <div class="app-name">Panasonic Hair Dryer</div>
+      <div class="app-name-cn">松下吹风机</div>
+      <div class="app-model">Model: EH-NE66-K655</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Press the power button to turn on or off.<span class="cn">按电源键开机或关机。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Adjust heat and speed settings to your preference.<span class="cn">根据个人喜好调节温度和风速档位。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Clean the filter regularly to maintain best performance.<span class="cn">定期清洁过滤网以保持最佳性能。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Keep away from water at all times.<span class="cn">请始终远离水源，切勿在水槽或浴缸旁使用。</span></div>
+</div></section></div>
+
+<!-- 14 STEAM IRON -->
+<div id="a14"><section><div class="appliance">
+  <div class="app-head">
+    <div class="app-icon">👔</div>
+    <div>
+      <div class="app-num">14 · Laundry</div>
+      <div class="app-name">Philips Steam Iron</div>
+      <div class="app-name-cn">飞利浦蒸汽熨斗</div>
+      <div class="app-model">Model: DST3040</div>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-block-title">How to Use <span class="cn">使用方法</span></div>
+    <div class="step-item"><div class="step-num">1</div><div class="step-text">Fill the water tank to the MAX level for steam ironing.<span class="cn">加水至MAX刻度以进行蒸汽熨烫。</span></div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text">Set the temperature dial according to the fabric type (check the garment label).<span class="cn">根据布料类型设定温度旋钮（请查看衣物标签）。</span></div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text">Wait for the ready indicator light to turn off before ironing.<span class="cn">待指示灯熄灭后再开始熨烫。</span></div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text">Press the steam button for extra steam, or use the spray function for stubborn creases.<span class="cn">按蒸汽键释放额外蒸汽，或使用喷雾功能处理顽固褶皱。</span></div></div>
+    <div class="step-item"><div class="step-num">5</div><div class="step-text">After use, turn the temperature dial to Min/Off and empty any remaining water.<span class="cn">使用后将温度旋钮转至最低/关闭位置，并倒空剩余水分。</span></div></div>
+  </div>
+  <div class="warn-box">⚠️ Always stand the iron upright on its heel when not in use. Never leave it unattended while hot, and keep out of reach of children.<span class="cn">不使用时请务必将熨斗竖立放置。发热时切勿离开，并请放在儿童无法触及之处。</span></div>
+</div></section></div>
+
+<footer>
+  <svg width="150" height="46" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;">
+    <circle cx="40" cy="40" r="34" fill="none" stroke="#C9A84C" stroke-width="1.8"/>
+    <circle cx="40" cy="40" r="27" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+    <text x="40" y="48" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#C9A84C" text-anchor="middle" letter-spacing="1.5">JR</text>
+    <line x1="84" y1="16" x2="84" y2="64" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+    <text x="98" y="44" font-family="Georgia,serif" font-size="30" font-weight="400" fill="#FFFFFF" letter-spacing="7">LUX</text>
+    <text x="99" y="60" font-family="Georgia,serif" font-size="8" fill="#C9A84C" letter-spacing="3.5">HOMESTAYS</text>
+  </svg>
+  <div class="footer-sub">Star Residence One &nbsp;·&nbsp; Kuala Lumpur, Malaysia</div>
+  <div class="footer-line"></div>
+  <p class="footer-note">For any appliance questions, WhatsApp your host anytime.<span class="cn">如有任何电器使用问题，请随时通过WhatsApp联系房东。</span></p>
+</footer>
+
+</body>
+</html>
